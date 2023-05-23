@@ -16,6 +16,7 @@ const PostImage = styled.Image`
 `;
 
 const PostDetails = styled.View`
+  flex: 1;
   justify-content: center;
 `;
 
