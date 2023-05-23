@@ -46,7 +46,7 @@ export const Post = ({ data: { title, published_date, byline, multimedia } }) =>
       />
       <PostDetails>
         <PostTitle>{title}</PostTitle>
-        <PostDate> {published_date}</PostDate>
+        <PostDate> {published_date.split('T').join(' ').slice(0, -9)}</PostDate>
         <PostAuthor>{byline}</PostAuthor>
       </PostDetails>
     </PostView>
