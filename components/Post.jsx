@@ -12,7 +12,7 @@ const PostImage = styled.Image`
   width: 60px;
   height: 60px;
   border-radius: 12px;
-  margin-right: 12px;
+  margin-right: 8px;
 `;
 
 const PostDetails = styled.View`
@@ -35,18 +35,17 @@ const PostAuthor = styled.Text`
   font-size: 12px;
 `;
 
-export const Post = ({ data: { title, createdAt, byline, multimedia } }) => {
-  console.log('POST-TITLE', title);
+export const Post = ({ data: { title, published_date, byline, multimedia } }) => {
   return (
     <PostView>
       <PostImage
         source={{
-          uri: multimedia.url,
+          uri: multimedia[0].url,
         }}
       />
       <PostDetails>
         <PostTitle>{title}</PostTitle>
-        <PostDate> {createdAt}</PostDate>
+        <PostDate> {published_date}</PostDate>
         <PostAuthor>{byline}</PostAuthor>
       </PostDetails>
     </PostView>
