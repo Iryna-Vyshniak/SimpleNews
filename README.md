@@ -1,1 +1,1 @@
-# SimpleNews
+# SimpleNews App
