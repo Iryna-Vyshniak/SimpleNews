@@ -6,10 +6,10 @@ import { Post } from './components/Post.jsx';
 import { getTopNews } from './services/newsApi.js';
 
 const SafeView = styled.SafeAreaView`
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#ecf0f1",
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ecf0f1;
 `;
 
 export default function App() {
@@ -22,9 +22,7 @@ export default function App() {
       try {
         setIsLoading(true);
         setError(false);
-
-        const results = await getTopNews();
-        console.log(results);
+        const { results } = await getTopNews();
         setNews(results);
       } catch (error) {
         Alert.alert('Error', 'Oops, there is no articles');
@@ -38,7 +36,7 @@ export default function App() {
     <>
       {isLoading && <Text>Loading...</Text>}
       {error && Alert.alert('Error', 'Oops, there is no articles. Please try again')}
-      {!error && !isLoading && news.length > 0 && (
+      {!error && !isLoading && (
         <SafeView>
           <ScrollView>
             {news.map((newsItem, idx) => (
