@@ -29,18 +29,25 @@ const PostDate = styled.Text`
   color: rgba(0, 0, 0, 0.4);
   font-size: 12px;
 `;
+const PostAuthor = styled.Text`
+  margin-top: 2px;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 12px;
+`;
 
-export const Post = () => {
+export const Post = ({ data: { title, createdAt, byline, multimedia } }) => {
+  console.log('POST-TITLE', title);
   return (
     <PostView>
       <PostImage
         source={{
-          uri: 'https://th.bing.com/th/id/OIP.s0Nhr9JvHRJ00CbWbmTtPAHaEo?pid=ImgDet&rs=1',
+          uri: multimedia.url,
         }}
       />
       <PostDetails>
-        <PostTitle>Test Article</PostTitle>
-        <PostDate> {new Date().toLocaleString()}</PostDate>
+        <PostTitle>{title}</PostTitle>
+        <PostDate> {createdAt}</PostDate>
+        <PostAuthor>{byline}</PostAuthor>
       </PostDetails>
     </PostView>
   );
