@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   Text,
   Alert,
@@ -10,10 +11,9 @@ import {
 import { useState, useEffect } from 'react';
 
 import { Post } from '../components/Post';
-import { getTopNews } from '../services/newsApi.js';
+import { options } from '../services/newsApi.js';
 
 export const Home = ({ navigation }) => {
-  //console.log(navigation);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [news, setNews] = useState([]);
@@ -23,8 +23,9 @@ export const Home = ({ navigation }) => {
       try {
         setIsLoading(true);
         setError(false);
-        const { results } = await getTopNews();
-        setNews(results.lists);
+
+        const response = await axios.request(options);
+        setNews(response.data);
       } catch (error) {
         Alert.alert('Error', 'Oops, there is no articles');
       } finally {
@@ -34,7 +35,19 @@ export const Home = ({ navigation }) => {
   };
 
   useEffect(() => {
-    fetchNews();
+    (async () => {
+      try {
+        setIsLoading(true);
+        setError(false);
+
+        const response = await axios.request(options);
+        setNews(response.data);
+      } catch (error) {
+        Alert.alert('Error', 'Oops, there is no articles');
+      } finally {
+        setIsLoading(false);
+      }
+    })();
   }, []);
 
   return (
@@ -57,11 +70,21 @@ export const Home = ({ navigation }) => {
           // swipe down
           refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchNews()} />}
           data={news}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => navigation.navigate('DetailsPost')}>
-              <Post data={item} key={item.list_id} />
-            </TouchableOpacity>
-          )}
+          keyExtractor={(_, idx) => idx}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('DetailsPost', {
+                    screen: 'DetailsPost',
+                    item: item.brand,
+                  })
+                }
+              >
+                <Post data={item} />
+              </TouchableOpacity>
+            );
+          }}
         />
       )}
     </>
