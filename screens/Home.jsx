@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import {
   Text,
   Alert,
@@ -9,10 +8,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useState, useEffect } from 'react';
-import { Post } from './components/Post.jsx';
-import { getTopNews } from './services/newsApi.js';
 
-const Home = () => {
+import { Post } from '../components/Post';
+import { getTopNews } from '../services/newsApi.js';
+
+export const Home = ({ navigation }) => {
+  //console.log(navigation);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [news, setNews] = useState([]);
@@ -23,7 +24,7 @@ const Home = () => {
         setIsLoading(true);
         setError(false);
         const { results } = await getTopNews();
-        setNews(results);
+        setNews(results.lists);
       } catch (error) {
         Alert.alert('Error', 'Oops, there is no articles');
       } finally {
@@ -56,16 +57,13 @@ const Home = () => {
           // swipe down
           refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchNews()} />}
           data={news}
-          renderItem={({ item }, idx) => (
-            <TouchableOpacity>
-              <Post data={item} key={idx} />
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => navigation.navigate('DetailsPost')}>
+              <Post data={item} key={item.list_id} />
             </TouchableOpacity>
           )}
         />
       )}
-      <StatusBar theme='auto' />
     </>
   );
 };
-
-export default Home;
