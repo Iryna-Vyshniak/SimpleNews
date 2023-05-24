@@ -1,3 +1,4 @@
+import { Text, View, Image } from 'react-native';
 import styled from 'styled-components/native';
 
 const PostView = styled.View`
@@ -30,24 +31,24 @@ const PostDate = styled.Text`
   color: rgba(0, 0, 0, 0.4);
   font-size: 12px;
 `;
-const PostAuthor = styled.Text`
+const PostBrand = styled.Text`
   margin-top: 2px;
   color: rgba(0, 0, 0, 0.4);
   font-size: 12px;
 `;
 
-export const Post = ({ data: { title, published_date, byline, multimedia } }) => {
+export const Post = ({ data }) => {
   return (
     <PostView>
       <PostImage
         source={{
-          uri: multimedia[0].url,
+          uri: `https://${data.api_featured_image}`,
         }}
       />
       <PostDetails>
-        <PostTitle>{title}</PostTitle>
-        <PostDate> {published_date.split('T').join(' ').slice(0, -9)}</PostDate>
-        <PostAuthor>{byline}</PostAuthor>
+        <PostTitle>{data.name}</PostTitle>
+        <PostBrand>{data.brand}</PostBrand>
+        <PostDate>{data.created_at.split('T').join(' ').slice(0, -8)}</PostDate>
       </PostDetails>
     </PostView>
   );
