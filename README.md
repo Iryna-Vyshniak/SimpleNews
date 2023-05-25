@@ -7,8 +7,12 @@ News of Makeup Products
 </div>
 
 Scan this code with a device
+
 <div align="center">
   <img src="https://ik.imagekit.io/irinavn2011/Screenshot_2023-05-25_001228.jpg?updatedAt=1684962881938" width="360" height="auto"/>
+</div>
+<div align="center">
+  <img src="https://ik.imagekit.io/irinavn2011/simpleNews.jpg?updatedAt=1685036123260" width="360" height="auto"/>
 </div>
 Open the Camera app and point it at this code. Then tap the notification that appears.
 
@@ -20,5 +24,3 @@ Send a link to a device
 
 Send and open the URL below to install it on a device.
 https://expo.dev/accounts/irinavn/projects/SimpleNews/builds/c0ab0ea3-4b71-400f-bfc7-544d7435cfd5
-
-
