@@ -70,7 +70,7 @@ export const Home = ({ navigation }) => {
           // swipe down
           refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchNews()} />}
           data={news}
-          keyExtractor={(_, idx) => idx}
+          keyExtractor={(_, idx) => idx.toString()}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity

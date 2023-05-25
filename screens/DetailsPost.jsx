@@ -91,7 +91,7 @@ const DetailsPost = ({ route, navigation }) => {
       {!error && !isLoading && (
         <FlatList
           data={data}
-          keyExtractor={(_, idx) => idx}
+          keyExtractor={(_, idx) => idx.toString()}
           renderItem={({ item }) => (
             <PostView>
               <PostImage
